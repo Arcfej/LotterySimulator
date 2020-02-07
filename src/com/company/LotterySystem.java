@@ -25,6 +25,10 @@ public class LotterySystem {
         tickets = new ArrayList<>();
     }
 
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
     public void buyTicket(Ticket newTicket) {
         tickets.add(newTicket);
     }
