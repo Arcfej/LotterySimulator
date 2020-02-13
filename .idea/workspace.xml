@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="26c02e9e-8a43-4745-bfd4-044e0a50382e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/company/test/LotterySystemTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/LotterySystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LotterySystem.java" afterDir="false" />
     </list>
     <list id="04bf6572-079d-4a2d-8fab-3fbc7f0dff1e" name="Implement LotterySystem" comment="" />
     <list id="ba1f976b-5921-4b70-9a17-7ec647910214" name="Revert &quot;Implement LotterySystem&quot;" comment="Revert &quot;Implement LotterySystem&quot;&#10;&#10;This reverts commit f5c63a39" />
@@ -119,7 +117,21 @@
       <option name="project" value="LOCAL" />
       <updated>1581093668488</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Create test file">
+      <created>1581095528828</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1581095528828</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Add documentation file from previous assignment.">
+      <created>1581597105421</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1581597105421</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -139,7 +151,9 @@
     <MESSAGE value="Init" />
     <MESSAGE value="Implement LotterySystem" />
     <MESSAGE value="Add LotterySystem back" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add LotterySystem back" />
+    <MESSAGE value="Create test file" />
+    <MESSAGE value="Add documentation file from previous assignment." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add documentation file from previous assignment." />
   </component>
   <component name="WindowStateProjectService">
     <state x="679" y="194" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1581095096271">
@@ -166,10 +180,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1126" y="408" width="408" height="240" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040@0.0.1920.1040" timestamp="1581091530827" />
-    <state x="984" y="119" key="CommitChangelistDialog2" timestamp="1581093667145">
+    <state x="814" y="119" width="1106" height="812" key="CommitChangelistDialog2" timestamp="1581597104343">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="984" y="119" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1581093667145" />
+    <state x="814" y="119" width="1106" height="812" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1581597104343" />
     <state x="864" y="100" width="963" height="847" key="DiffContextDialog" timestamp="1581093658199">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -182,14 +196,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1193" y="439" key="VCS.ChangelistChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1581093091486" />
-    <state x="922" y="244" key="Vcs.Push.Dialog.v2" timestamp="1581093689407">
+    <state x="922" y="244" key="Vcs.Push.Dialog.v2" timestamp="1581597109801">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="922" y="244" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1581093689407" />
-    <state x="1042" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1581094995798">
+    <state x="922" y="244" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1581597109801" />
+    <state x="1042" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1581596068045">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1042" y="343" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581094995798" />
+    <state x="1042" y="343" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581596068045" />
     <state x="1144" y="416" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1581095263897">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
