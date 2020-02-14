@@ -44,7 +44,7 @@ public class LotterySystem {
                 .collect(Collectors.toList());
     }
 
-    public static Set<Integer> generateNumbersForTicket() {
+    private static Set<Integer> generateNumbersForTicket() {
         Random rnd = new Random();
         Set<Integer> numbers = new HashSet<>(DRAW_COUNT);
         while (numbers.size() < DRAW_COUNT) {

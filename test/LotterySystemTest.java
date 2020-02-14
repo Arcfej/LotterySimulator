@@ -64,16 +64,4 @@ class LotterySystemTest {
             }
         }
     }
-
-    @Test
-    void drawLotteryHundredTimes() {
-        for (int i = 0; i < 100; i++) {
-            Set<Integer> numbers = generateNumbersForTicket();
-            for (Integer num : numbers) {
-                assertTrue(num >= 0 && num <= LotterySystem.getLotteryMax());
-            }
-        }
-    }
-
-
 }
