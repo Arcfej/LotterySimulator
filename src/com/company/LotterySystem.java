@@ -17,21 +17,17 @@ public class LotterySystem {
 
     public static final int MATCH_6_WIN = 1000000;
 
-    private static int lotteryMax;
+    private static int lotteryMax = 10;
 
     private List<Ticket> tickets;
 
-    public LotterySystem(Scanner in, int lotteryMax) {
+    public LotterySystem(int lotteryMax) {
         tickets = new ArrayList<>();
         LotterySystem.lotteryMax = lotteryMax;
     }
 
-    public int getLotteryMax() {
+    public static int getLotteryMax() {
         return lotteryMax;
-    }
-
-    public void setLotteryMax(int lotteryMax) {
-        LotterySystem.lotteryMax = lotteryMax;
     }
 
     public List<Ticket> getTickets() {
@@ -48,7 +44,7 @@ public class LotterySystem {
                 .collect(Collectors.toList());
     }
 
-    private static Set<Integer> generateNumbersForTicket() {
+    public static Set<Integer> generateNumbersForTicket() {
         Random rnd = new Random();
         Set<Integer> numbers = new HashSet<>(DRAW_COUNT);
         while (numbers.size() < DRAW_COUNT) {
@@ -63,15 +59,20 @@ public class LotterySystem {
 
         private final Set<Integer> numbers;
 
-        public Ticket(String id, Set<Integer> numbers) throws WrongCountOfNumbersException {
+        public Ticket(String id, Set<Integer> numbers) throws WrongCountOfNumbersException, NotValidNumberException {
             if (numbers.size() != 6) {
                 throw new WrongCountOfNumbersException(LotterySystem.lotteryMax + " numbers should be provided to the Ticket");
+            }
+            for (Integer num : numbers) {
+                if (num > lotteryMax || num < 0) {
+                    throw new NotValidNumberException("The numbers should be between 0 and " + LotterySystem.lotteryMax);
+                }
             }
             this.id = id;
             this.numbers = numbers;
         }
 
-        public static Ticket generateRandomTicket(String id) throws WrongCountOfNumbersException {
+        public static Ticket generateRandomTicket(String id) throws WrongCountOfNumbersException, NotValidNumberException {
             return new Ticket(id, generateNumbersForTicket());
         }
 
