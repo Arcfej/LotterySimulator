@@ -25,7 +25,7 @@ class LotterySystemTest {
         Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         try {
             new Ticket("Test", numbers);
-        } catch (WrongCountOfNumbersException | NotValidNumberException e) {
+        } catch (Exception e) {
             fail("An exception shouldn't been thrown");
         }
     }
@@ -59,7 +59,7 @@ class LotterySystemTest {
         for (int i = 0; i < 100; i++) {
             try {
                 Ticket.generateRandomTicket("Test");
-            } catch (WrongCountOfNumbersException | NotValidNumberException e) {
+            } catch (Exception e) {
                 fail("An exception shouldn't been thrown");
             }
         }
