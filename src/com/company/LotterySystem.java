@@ -5,8 +5,6 @@ import java.util.stream.Collectors;
 
 public class LotterySystem {
 
-    public static final int LOTTERY_MAX = 10;
-
     public static final int DRAW_COUNT = 6;
 
     public static final int TICKET_PRICE = 2;
@@ -19,10 +17,21 @@ public class LotterySystem {
 
     public static final int MATCH_6_WIN = 1000000;
 
+    private static int lotteryMax;
+
     private List<Ticket> tickets;
 
-    public LotterySystem(Scanner in) {
+    public LotterySystem(Scanner in, int lotteryMax) {
         tickets = new ArrayList<>();
+        LotterySystem.lotteryMax = lotteryMax;
+    }
+
+    public int getLotteryMax() {
+        return lotteryMax;
+    }
+
+    public void setLotteryMax(int lotteryMax) {
+        LotterySystem.lotteryMax = lotteryMax;
     }
 
     public List<Ticket> getTickets() {
@@ -43,7 +52,7 @@ public class LotterySystem {
         Random rnd = new Random();
         Set<Integer> numbers = new HashSet<>(DRAW_COUNT);
         while (numbers.size() < DRAW_COUNT) {
-            numbers.add(rnd.nextInt(LOTTERY_MAX + 1));
+            numbers.add(rnd.nextInt(lotteryMax + 1));
         }
         return numbers;
     }
@@ -54,12 +63,15 @@ public class LotterySystem {
 
         private final Set<Integer> numbers;
 
-        public Ticket(String id, Set<Integer> numbers) {
+        public Ticket(String id, Set<Integer> numbers) throws WrongCountOfNumbersException {
+            if (numbers.size() != 6) {
+                throw new WrongCountOfNumbersException(LotterySystem.lotteryMax + " numbers should be provided to the Ticket");
+            }
             this.id = id;
             this.numbers = numbers;
         }
 
-        public static Ticket generateRandomTicket(String id) {
+        public static Ticket generateRandomTicket(String id) throws WrongCountOfNumbersException {
             return new Ticket(id, generateNumbersForTicket());
         }
 
