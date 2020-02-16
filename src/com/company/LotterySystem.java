@@ -40,6 +40,12 @@ public class LotterySystem {
 
     public List<Ticket> drawWinners() {
         Set<Integer> draw = generateNumbersForTicket();
+        List<Ticket> winners = new ArrayList<>();
+        for (Ticket ticket : tickets) {
+            ticket.getNumbers().stream()
+                    .filter(draw::contains)
+                    .
+        }
         return tickets.stream()
                 .filter(ticket -> ticket.getNumbers().equals(draw))
                 .collect(Collectors.toList());

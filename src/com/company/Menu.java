@@ -13,7 +13,7 @@ public class Menu {
 
     private int weeks;
 
-    private Set<String> names = new HashSet<>();
+    private Set<Player> players = new HashSet<>();
 
     public static void main(String[] args) {
         Menu menu = new Menu();
@@ -33,8 +33,9 @@ public class Menu {
         weeks = getWeeks();
 
         do {
-            String name = getName();
-            createTicket(name);
+            Player player = getName();
+            player.setTicket(createTicket(player));
+            players.add(player);
         } while (isNextPlayer());
 
         System.out.println("Lets draw!");
@@ -54,7 +55,7 @@ public class Menu {
 
     private int getUpperBound() {
         System.out.println("Right now you can set the range of numbers you can bet on.");
-        int upperBound = getIntInput("Which should be the upper bound (included) of the game (min. 6)?",
+        int upperBound = getIntInput("Which should be the upper bound (included) of the game (more than 6)?",
                 i -> i > 6,
                 "Please provide a whole number bigger than 6.");
         thankInput();
@@ -69,25 +70,31 @@ public class Menu {
         return weeks;
     }
 
-    private String getName() {
-        System.out.println("What is your name?");
-        String name = in.nextLine();
-        if (name.isBlank()) {
-            System.out.println("Please provide a name");
-        } else if (names.contains(name)) {
-            System.out.println("You've already placed your bet. Yield the game to the next player.");
+    private Player getName() {
+        Player player;
+        while (true) {
+            System.out.println("What is your name?");
+            String name = in.nextLine();
+            player = new Player(name);
+            if (name.isBlank()) {
+                System.out.println("Please provide a name");
+            } else if (players.contains(player)) {
+                System.out.println("You've already placed your bet. Yield the game to the next player.");
+            } else {
+                break;
+            }
         }
-        names.add(name);
         thankInput();
-        return name;
+        return player;
     }
 
-    private void createTicket(String name) {
+    private LotterySystem.Ticket createTicket(Player player) {
         while (true) {
             try {
                 Set<Integer> bet = getBet();
-                lotterySystem.buyTicket(new LotterySystem.Ticket(name, bet));
-                break;
+                LotterySystem.Ticket ticket = new LotterySystem.Ticket(player.getName(), bet);
+                lotterySystem.buyTicket(ticket);
+                return ticket;
             } catch (WrongCountOfNumbersException | NotValidNumberException e) {
                 System.out.println("Some error occurred during your ticket creation. Please try again.");
             }
@@ -126,6 +133,9 @@ public class Menu {
     private void startDraw() {
         for (int i = 0; i < weeks; i++) {
             System.out.print("The " + getOrdinalNumber(i) + " week's winning numbers are: ");
+            List<LotterySystem.Ticket> wins = lotterySystem.drawWinners();
+            players.forEach(Player::buyTicket);
+            players.forEach(player -> player.getTicket().getNumbers().stream().filter(::contains).collect(Collections.list()));
 
         }
     }
