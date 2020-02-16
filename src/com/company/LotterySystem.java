@@ -39,8 +39,9 @@ public class LotterySystem {
     }
 
     public List<Ticket> drawWinners() {
+        Set<Integer> draw = generateNumbersForTicket();
         return tickets.stream()
-                .filter(ticket -> ticket.getNumbers().equals(generateNumbersForTicket()))
+                .filter(ticket -> ticket.getNumbers().equals(draw))
                 .collect(Collectors.toList());
     }
 
@@ -48,7 +49,7 @@ public class LotterySystem {
         Random rnd = new Random();
         Set<Integer> numbers = new HashSet<>(DRAW_COUNT);
         while (numbers.size() < DRAW_COUNT) {
-            numbers.add(rnd.nextInt(lotteryMax + 1));
+            numbers.add(rnd.nextInt(lotteryMax) + 1);
         }
         return numbers;
     }
@@ -64,8 +65,8 @@ public class LotterySystem {
                 throw new WrongCountOfNumbersException(LotterySystem.lotteryMax + " numbers should be provided to the Ticket");
             }
             for (Integer num : numbers) {
-                if (num > lotteryMax || num < 0) {
-                    throw new NotValidNumberException("The numbers should be between 0 and " + LotterySystem.lotteryMax);
+                if (num > lotteryMax || num < 1) {
+                    throw new NotValidNumberException("The numbers should be between 1 and " + LotterySystem.lotteryMax);
                 }
             }
             this.id = id;
