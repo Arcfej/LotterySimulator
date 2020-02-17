@@ -24,7 +24,7 @@ class LotterySystemTest {
 
     @Test
     void createValidTicket() {
-        Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        MySet<Integer> numbers = new MySet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         try {
             new Ticket("Test", numbers);
         } catch (Exception e) {
@@ -34,25 +34,25 @@ class LotterySystemTest {
 
     @Test
     void createTicketWithFiveNumbers() {
-        Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5));
+        MySet<Integer> numbers = new MySet<>(Arrays.asList(1, 2, 3, 4, 5));
         assertThrows(WrongCountOfNumbersException.class, () -> new Ticket("Test", numbers));
     }
 
     @Test
     void createTicketWithSevenNumbers() {
-        Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
+        MySet<Integer> numbers = new MySet<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
         assertThrows(WrongCountOfNumbersException.class, () -> new Ticket("Test", numbers));
     }
 
     @Test
     void createTicketWithNegativeNumber() {
-        Set<Integer> numbers = new HashSet<>(Arrays.asList(-1, 1, 2, 3, 4, 5));
+        MySet<Integer> numbers = new MySet<>(Arrays.asList(-1, 1, 2, 3, 4, 5));
         assertThrows(NotValidNumberException.class, () -> new Ticket("Test", numbers));
     }
 
     @Test
     void createTicketWithGreaterNumberThanMax() {
-        Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 11));
+        MySet<Integer> numbers = new MySet<>(Arrays.asList(1, 2, 3, 4, 5, 11));
         assertThrows(NotValidNumberException.class, () -> new Ticket("Test", numbers));
     }
 

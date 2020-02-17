@@ -47,9 +47,7 @@ public class LotterySystem {
         Map<String, Set<Integer>> winners = new HashMap<>();
         winners.put(WINNER_SET_KEY, draw);
         for (Ticket ticket : tickets) {
-            Set<Integer> win = ticket.getNumbers().stream()
-                    .filter(draw::contains)
-                    .collect(Collectors.toSet());
+            Set<Integer> win = ticket.getNumbers().intersect(draw);
             if (!win.isEmpty()) {
                 winners.put(ticket.getId(), win);
             }
@@ -57,9 +55,9 @@ public class LotterySystem {
         return winners;
     }
 
-    private static Set<Integer> generateNumbersForTicket() {
+    private static MySet<Integer> generateNumbersForTicket() {
         Random rnd = new Random();
-        Set<Integer> numbers = new HashSet<>(DRAW_COUNT);
+        MySet<Integer> numbers = new MySet<>(DRAW_COUNT);
         while (numbers.size() < DRAW_COUNT) {
             numbers.add(rnd.nextInt(lotteryMax) + 1);
         }
@@ -70,9 +68,9 @@ public class LotterySystem {
 
         private final String id;
 
-        private final Set<Integer> numbers;
+        private final MySet<Integer> numbers;
 
-        public Ticket(String id, Set<Integer> numbers) throws WrongCountOfNumbersException, NotValidNumberException {
+        public Ticket(String id, MySet<Integer> numbers) throws WrongCountOfNumbersException, NotValidNumberException {
             if (numbers.size() != 6) {
                 throw new WrongCountOfNumbersException(LotterySystem.lotteryMax + " numbers should be provided to the Ticket");
             }
@@ -93,7 +91,7 @@ public class LotterySystem {
             return id;
         }
 
-        public Set<Integer> getNumbers() {
+        public MySet<Integer> getNumbers() {
             return numbers;
         }
     }

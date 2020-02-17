@@ -13,7 +13,7 @@ public class Menu {
 
     private int weeks;
 
-    private Set<Player> players = new HashSet<>();
+    private Set<Player> players = new MySet<>();
 
     public static void main(String[] args) {
         Menu menu = new Menu();
@@ -91,7 +91,7 @@ public class Menu {
     private LotterySystem.Ticket createTicket(Player player) {
         while (true) {
             try {
-                Set<Integer> bet = getBet();
+                MySet<Integer> bet = getBet();
                 LotterySystem.Ticket ticket = new LotterySystem.Ticket(player.getName(), bet);
                 lotterySystem.buyTicket(ticket);
                 return ticket;
@@ -101,8 +101,8 @@ public class Menu {
         }
     }
 
-    private Set<Integer> getBet() {
-        Set<Integer> numbers = new HashSet<>(LotterySystem.DRAW_COUNT);
+    private MySet<Integer> getBet() {
+        MySet<Integer> numbers = new MySet<>(LotterySystem.DRAW_COUNT);
         while (numbers.size() < LotterySystem.DRAW_COUNT) {
             boolean success = numbers.add(
                     getIntInput("What is your " + getOrdinalNumber(numbers.size() + 1) + " number?",
