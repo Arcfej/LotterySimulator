@@ -24,7 +24,7 @@ public class Menu {
         in = new Scanner(System.in);
     }
 
-    private void showMenu() {
+    public void showMenu() {
         showIntro();
 
         int upperBound = getUpperBound();
@@ -105,8 +105,8 @@ public class Menu {
         Set<Integer> numbers = new HashSet<>(LotterySystem.DRAW_COUNT);
         while (numbers.size() < LotterySystem.DRAW_COUNT) {
             boolean success = numbers.add(
-                    getIntInput("What is your " + getOrdinalNumber(numbers.size() + 1) + "number?",
-                            i -> i > 0 && i < LotterySystem.getLotteryMax(),
+                    getIntInput("What is your " + getOrdinalNumber(numbers.size() + 1) + " number?",
+                            i -> i > 0 && i <= LotterySystem.getLotteryMax(),
                             "Please provide a valid number between 1 and " + LotterySystem.getLotteryMax() + ".")
             );
             if (!success) {
@@ -132,12 +132,45 @@ public class Menu {
 
     private void startDraw() {
         for (int i = 0; i < weeks; i++) {
-            System.out.print("The " + getOrdinalNumber(i) + " week's winning numbers are: ");
-            List<LotterySystem.Ticket> wins = lotterySystem.drawWinners();
             players.forEach(Player::buyTicket);
-            players.forEach(player -> player.getTicket().getNumbers().stream().filter(::contains).collect(Collections.list()));
 
+            Map<String, Set<Integer>> wins = lotterySystem.drawWinners();
+
+            System.out.print("The " + getOrdinalNumber(i + 1) + " week's winning numbers are: ");
+            Set<Integer> winnerSet = wins.remove(LotterySystem.WINNER_SET_KEY);
+            winnerSet.stream()
+                    .sorted(Comparator.naturalOrder())
+                    .forEach(number -> System.out.print(number + "  "));
+            System.out.println();
+
+            wins.forEach((key, value) -> {
+                int win = LotterySystem.WINS[value.size() - 1];
+
+                if (win > 0) {
+                    Player winner = players.stream()
+                            .filter(player -> player.getName().equals(key))
+                            .findAny()
+                            .orElse(null);
+
+                    if (winner != null) {
+                        winner.addWin(win);
+
+                        System.out.print(winner.getName() + " won " + formatCurrency(win) + " with the numbers: ");
+                        value.forEach(number -> System.out.print(number + " "));
+                        System.out.println();
+                    }
+                }
+            });
+            System.out.println();
         }
+
+        System.out.println("Final payoff: ");
+        players.forEach(player -> {
+            System.out.println(player.getName() + " spent " + formatCurrency(player.getMoneySpent()) + " and won " + formatCurrency(player.getMoneyWon()) + ".");
+            int win = player.getMoneyWon() - player.getMoneySpent();
+            System.out.println(player.getName() + "'s money changed by " + formatCurrency(win));
+        });
+
     }
 
     private static String formatCurrency(Integer money) {

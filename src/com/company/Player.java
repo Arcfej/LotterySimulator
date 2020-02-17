@@ -40,6 +40,10 @@ public class Player {
         moneySpent += LotterySystem.TICKET_PRICE;
     }
 
+    public void addWin(int moneyWon) {
+        this.moneyWon += moneyWon;
+    }
+
     @Override
     public boolean equals(Object obj) {
         Player player = null;

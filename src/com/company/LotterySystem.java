@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 public class LotterySystem {
 
+    public static final String WINNER_SET_KEY = "lsléabg48q4qdsjaééebbféé478géqhgkjgaglsa21éáahgnbrpáeu72b";
+
     public static final int DRAW_COUNT = 6;
 
     public static final int TICKET_PRICE = 2;
@@ -16,6 +18,8 @@ public class LotterySystem {
     public static final int MATCH_5_WIN = 1000;
 
     public static final int MATCH_6_WIN = 1000000;
+
+    public static final int[] WINS = new int[]{0, 0, MATCH_3_WIN, MATCH_4_WIN, MATCH_5_WIN, MATCH_6_WIN};
 
     private static int lotteryMax = 10;
 
@@ -38,17 +42,19 @@ public class LotterySystem {
         tickets.add(newTicket);
     }
 
-    public List<Ticket> drawWinners() {
+    public Map<String, Set<Integer>> drawWinners() {
         Set<Integer> draw = generateNumbersForTicket();
-        List<Ticket> winners = new ArrayList<>();
+        Map<String, Set<Integer>> winners = new HashMap<>();
+        winners.put(WINNER_SET_KEY, draw);
         for (Ticket ticket : tickets) {
-            ticket.getNumbers().stream()
+            Set<Integer> win = ticket.getNumbers().stream()
                     .filter(draw::contains)
-                    .
+                    .collect(Collectors.toSet());
+            if (!win.isEmpty()) {
+                winners.put(ticket.getId(), win);
+            }
         }
-        return tickets.stream()
-                .filter(ticket -> ticket.getNumbers().equals(draw))
-                .collect(Collectors.toList());
+        return winners;
     }
 
     private static Set<Integer> generateNumbersForTicket() {

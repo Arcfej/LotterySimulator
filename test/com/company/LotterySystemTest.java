@@ -1,3 +1,5 @@
+package com.company;
+
 import com.company.LotterySystem;
 import com.company.NotValidNumberException;
 import com.company.WrongCountOfNumbersException;
