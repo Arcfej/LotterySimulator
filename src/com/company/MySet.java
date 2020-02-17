@@ -19,7 +19,7 @@ public class MySet<E> extends HashSet<E> {
         super(collection);
     }
 
-    public Set<E> intersect(Set<E> secondSet) {
+    public Set<E> intersection(Set<E> secondSet) {
         return this.stream()
                 .filter(secondSet::contains)
                 .collect(Collectors.toSet());

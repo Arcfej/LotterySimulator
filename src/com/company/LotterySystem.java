@@ -1,7 +1,6 @@
 package com.company;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class LotterySystem {
 
@@ -47,7 +46,7 @@ public class LotterySystem {
         Map<String, Set<Integer>> winners = new HashMap<>();
         winners.put(WINNER_SET_KEY, draw);
         for (Ticket ticket : tickets) {
-            Set<Integer> win = ticket.getNumbers().intersect(draw);
+            Set<Integer> win = ticket.getNumbers().intersection(draw);
             if (!win.isEmpty()) {
                 winners.put(ticket.getId(), win);
             }
